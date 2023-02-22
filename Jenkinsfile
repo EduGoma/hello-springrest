@@ -48,7 +48,7 @@ pipeline {
       stage('Deploy to Elastic Beanstalk') {
         steps {
           withAWS(credentials: 'AWS-credential'){
-            ebDeploy(application: 'hello-eb2', environment: 'hello-eb2-dev', waitForCompletion: true)
+            sh'eb deploy hello-eb2 --environment hello-eb2-dev'
         }
       }
     }
