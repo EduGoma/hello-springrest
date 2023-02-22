@@ -16,8 +16,13 @@ pipeline {
       }
     }
     stage('Test'){
-      steps{        
-        junit allowEmptyResults: true, keepLongStdio: true, testResults: 'build/test-results/test/*xml'
+      steps{
+        sh 'gradle build'
+      }        
+      post{
+        always{
+          junit allowEmptyResults: true, keepLongStdio: true, testResults: 'build/libs/*xml'
+        }
       }        
     }
     stage('Package'){
