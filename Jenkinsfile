@@ -37,7 +37,7 @@ pipeline {
       steps{
         withAWS(credentials: 'AWS-credential') {
           sh "cd eb"
-          sh "eb deploy hello--eb2-dev"
+          sh "eb deploy hello-eb2-dev"
         }
       }
     }
