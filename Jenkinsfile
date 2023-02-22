@@ -29,7 +29,7 @@ pipeline {
         }
       }
     }
-    stage('Package'){
+    stage('Deploy changes'){
       steps{
         withAWS(credentials: 'AWS-credential') {
           sh "cd eb"
