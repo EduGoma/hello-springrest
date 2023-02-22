@@ -47,8 +47,9 @@ pipeline {
     }
       stage('Deploy to Elastic Beanstalk') {
         steps {
-          withAWS(credentials: 'AWS-credential'){
-            sh'eb deploy hello-eb2 --environment hello-eb2-dev'
+          withAWS(credentials: 'aws-credentials-id', region: 'eu-west-1') {
+            sh "eb deploy hello-eb2 --environment hello-eb2-dev"
+          }
         }
       }
     }
