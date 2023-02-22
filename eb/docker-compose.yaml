@@ -1,0 +1,6 @@
+version: "3"
+services:
+  web:
+    image: ghcr.io/edugoma/hello-springrest
+    ports:
+      - "8080:8080"
