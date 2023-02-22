@@ -1,3 +1,5 @@
 .git*
 Dockefile
 .dockerignore
+#teniendo en cuenta que en esta aplicación hacemos una construccion multistage, 
+#en la imagen final solo queda implementado el .jar que le trasferimos de la imagen builder

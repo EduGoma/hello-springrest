@@ -17,11 +17,11 @@ pipeline {
     }
     stage('Test'){
       steps{
-        sh 'gradle build'
+        sh './gradlew test'
       }        
       post{
         always{
-          junit allowEmptyResults: true, keepLongStdio: true, testResults: 'build/libs/*xml'
+          junit allowEmptyResults: true, keepLongStdio: true, testResults: 'build/test-results/test/*xml'
         }
       }        
     }
