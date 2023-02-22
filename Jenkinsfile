@@ -33,7 +33,7 @@ pipeline {
     }
     stage('Publish Html') {
       steps {
-        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, includes: '**/jacoco/html/**', keepAll: false, reportDir: 'build/reports/jacoco/', reportFiles: 'index.html', reportName: 'Code Coverge Report'])
+        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, includes: '**/jacoco/html/**', keepAll: false, reportDir: 'build/reports/jacoco/', reportFiles: 'index.html', reportName: 'jacocoReport'])
       }
     }
     stage('Package image'){
