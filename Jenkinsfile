@@ -17,11 +17,7 @@ pipeline {
     }
     stage('Test'){
       steps{        
-        post{
-          always{
-              junit allowEmptyResults: true, keepLongStdio: true, testResults: '/home/eduard/hello-springrest/build/test-results/test/*xml'
-          }
-        }
+        junit allowEmptyResults: true, keepLongStdio: true, testResults: 'build/test-results/test/*xml'
       }        
     }
     stage('Package'){
