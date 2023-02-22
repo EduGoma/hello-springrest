@@ -25,7 +25,18 @@ pipeline {
         }
       }        
     }
-    stage('Package'){
+    stage('Test Jococo') {
+      steps {
+        sh './gradlew clean test jacocoTestReport'
+        jacoco() 
+      }
+    }
+    stage('Publish Coverage') {
+      steps {
+        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, includes: '**/jacoco/html/**', keepAll: true, reportDir: 'build/reports/jacoco/', reportFiles: 'index.html'])
+      }
+    }
+    stage('Package image'){
       steps{
         withCredentials([string(credentialsId: 'github-token', variable: 'CR_PAT')]) {
             sh "echo $CR_PAT | docker login ghcr.io -u edugoma --password-stdin"
