@@ -44,9 +44,10 @@ pipeline {
       }
      }
     }
-   stage('trivy Test') {
-    steps {
-     sh 'trivy fs --scanners vuln,secret,config .'
+    stage('trivy Test') {
+     steps {
+      sh 'trivy fs --scanners vuln,secret,config .'
+     }
     }
     stage('Package image'){
       steps{
