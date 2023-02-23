@@ -31,11 +31,18 @@ pipeline {
         jacoco() 
       }
     }
-    stage('Test PMD') {
-      steps {
-	sh'./gradlew check'
-	recordIssues(tools: [pmdParser()])
+   stage('PMD Test') {
+    steps {
+     sh './gradlew pmdTest'
+    }
+    post {
+     always {
+      recordIssues(
+       enabledForFailure: true,
+       tool: pmdParser(pattern: 'build/reports/pmd/test.xml')
+      )
       }
+     }
     }
     stage('Package image'){
       steps{
