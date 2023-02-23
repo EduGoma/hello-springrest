@@ -47,12 +47,11 @@ pipeline {
     stage('trivy Test') {
      steps {
       sh "trivy image -f json -o results.json 'ghcr.io/edugoma/hello-springrest:latest'"
-     }
-     post {
-      always {
-       recordIssues(tools: [trivy()])
-      }
-     }
+      recordIssues(
+       enabledForFailure: true,
+       tool: trivy()
+      )
+     }      
     }
     stage('Package image'){
       steps{
