@@ -1,7 +1,7 @@
 FROM gradle:alpine AS builder
 WORKDIR /home/gradle
 COPY . /home/gradle
-RUN ./gradle/gradlew assemble
+RUN gradle build
 
 FROM amazoncorretto:11-alpine AS runtime 
 WORKDIR /app
