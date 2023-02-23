@@ -31,6 +31,12 @@ pipeline {
         jacoco() 
       }
     }
+    stage('Test PMD') {
+      steps {
+	sh'./gradlew check'
+	pmdParser()
+      }
+    }
     stage('Package image'){
       steps{
         withCredentials([string(credentialsId: 'github-token', variable: 'CR_PAT')]) {
