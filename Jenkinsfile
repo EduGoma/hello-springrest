@@ -44,6 +44,18 @@ pipeline {
       }
      }
     }
+   stage('Trivy Test') {
+    steps {
+     sh "trivy fs --scanners vuln,secret,config -f json -o fsresults.json ."
+     sh "trivy image -f json -o results.json 'ghcr.io/edugoma/hello-springrest:latest'"
+    }
+    post {
+     always {
+      recordIssues(tools: [trivy(pattern: '*.json')])
+      }
+     }
+    }	  
+/* Prueba de trivy en 2 pasos 
     stage('trivy Test file') {
      steps {
       sh "trivy fs --scanners vuln,secret,config -f json -o fsresults.json ."
@@ -55,7 +67,7 @@ pipeline {
       sh "trivy image -f json -o results.json 'ghcr.io/edugoma/hello-springrest:latest'"
       recordIssues(tools: [trivy(pattern: 'results.json', id: 'trivy-image')])
      }      
-    }
+    }*/
     stage('Package image'){
       steps{
         withCredentials([string(credentialsId: 'github-token', variable: 'CR_PAT')]) {
