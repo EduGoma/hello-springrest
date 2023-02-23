@@ -49,7 +49,7 @@ pipeline {
       sh "trivy image -f json -o results.json 'ghcr.io/edugoma/hello-springrest:latest'"
       recordIssues(
        enabledForFailure: true,
-       tool: trivy()
+       tool: trivy(pattern: '.')
       )
      }      
     }
