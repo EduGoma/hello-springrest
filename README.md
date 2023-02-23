@@ -4,6 +4,10 @@ Este es un ejemplo básico de una aplicación Spring REST que devuelve un mensaj
 ## Jenkins
 El archivo Jenkinsfile incluido en este repositorio define un pipeline de integración continua que automatiza las tareas de construcción y test de la aplicación. El pipeline se divide en diferentes etapas la ejecución de pruebas unitarias, la generación de informes y construcción de la imagen.
 
+Muestra cómo ejecutar Trivy en dos etapas distintas: "trivy Test file" y "trivy Test image". La etapa "trivy Test file" utiliza el comando "trivy fs" para analizar los archivos en la carpeta actual, mientras que la etapa "trivy Test image" utiliza el comando "trivy image" para analizar la imagen "ghcr.io/edugoma/hello-springrest:latest". Por defecto esta comentada y se uiliza en una sola etapa los dos análisis.
+
+En ambas etapas, los resultados del análisis de Trivy se escriben en un archivo JSON, que luego se utiliza como entrada para el plugin Warnings Next Generation. La función "recordIssues" se utiliza para agregar los resultados del análisis de vulnerabilidades de Trivy a la lista de problemas conocidos en el informe de Jenkins.
+
 Además, el pipeline también incluye una etapa de despliegue, que utiliza la herramienta Elastic Beanstalk para desplegar la aplicación en un entorno de producción. jenkins recibe un hook cada vez que hay un push a la rama principal main y despliega las actualizaciones.
 
 ## Docker Compose
