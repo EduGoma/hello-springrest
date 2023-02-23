@@ -34,7 +34,7 @@ pipeline {
     stage('Test PMD') {
       steps {
 	sh'./gradlew check'
-	pmdParser()
+	publishIssues([])
       }
     }
     stage('Package image'){
