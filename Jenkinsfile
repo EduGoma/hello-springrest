@@ -28,7 +28,7 @@ pipeline {
     stage('Test Jacoco') {
       steps {
         sh './gradlew clean test jacocoTestReport'
-        jacoco() 
+        jacoco execPattern: './build/jacoco/*.exec' 
       }
     }
    stage('PMD Test') {
