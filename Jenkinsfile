@@ -46,7 +46,7 @@ pipeline {
     }
     stage('trivy Test') {
      steps {
-      sh 'rivy ghcr.io/edugoma/hello-springrest:latest -f json -o results.json'
+      sh 'trivy ghcr.io/edugoma/hello-springrest:latest -f json -o results.json'
     post {
      always {
       recordIssues(tools: [trivy()])
