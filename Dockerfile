@@ -1,10 +1,10 @@
-FROM gradle:alpine AS builder
-WORKDIR /home/gradle
-COPY . /home/gradle
-RUN ./gradlew
+FROM amazoncorretto:11-alpine as builder
+WORKDIR /tmp/app
+COPY . .
+RUN ./gradlew assemble
 
 FROM amazoncorretto:11-alpine AS runtime 
 WORKDIR /app
-COPY --from=builder /home/gradle/build/libs/rest-service-0.0.1-SNAPSHOT.jar .
+COPY --from=builder /tmp/app/build/libs/rest-service-0.0.1-SNAPSHOT.jar .
 CMD ["java", "-jar", "rest-service-0.0.1-SNAPSHOT.jar"]
 EXPOSE 8080
