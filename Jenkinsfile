@@ -25,7 +25,7 @@ pipeline {
         }
       }        
     }
-    stage('Test Jococo') {
+    stage('Test Jacoco') {
       steps {
         sh './gradlew clean test jacocoTestReport'
         jacoco() 
