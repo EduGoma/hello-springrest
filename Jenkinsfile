@@ -46,7 +46,7 @@ pipeline {
     }
     stage('trivy Test file') {
      steps {
-      sh "trivy fs -f json -o fsresults.json /var/lib/jenkins/workspace/hello-springest"
+      sh "trivy fs --scanners vuln,secret,config -f json -o fsresults.json ."
       recordIssues(tools: [trivy(pattern: 'fsresults.json', id: 'trivy-file')])
      }      
     }
