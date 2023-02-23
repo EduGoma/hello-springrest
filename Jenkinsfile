@@ -47,13 +47,13 @@ pipeline {
     stage('trivy Test file') {
      steps {
       sh "trivy fs -f json -o fsresults.json ."
-      recordIssues(tools: [trivy(pattern: 'fsresults.json')])
+      recordIssues(tools: [trivy(pattern: 'fsresults.json', id: 'trivy-file')])
      }      
     }
     stage('trivy Test image') {
      steps {
       sh "trivy image -f json -o results.json 'ghcr.io/edugoma/hello-springrest:latest'"
-      recordIssues(tools: [trivy(pattern: 'results.json')])
+      recordIssues(tools: [trivy(pattern: 'results.json', id: 'trivy-image')])
      }      
     }
     stage('Package image'){
