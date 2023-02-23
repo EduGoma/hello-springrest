@@ -44,6 +44,19 @@ pipeline {
       }
      }
     }
+   stage('trivy Test') {
+    steps {
+     sh 'trivy fs --scanners vuln,secret,config .'
+    }
+    post {
+     always {
+      recordIssues(
+       enabledForFailure: true,
+       tool: trivy()
+      )
+      }
+     }
+    }
     stage('Package image'){
       steps{
         withCredentials([string(credentialsId: 'github-token', variable: 'CR_PAT')]) {
