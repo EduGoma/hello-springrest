@@ -8,7 +8,7 @@ pipeline {
     stage('Build images') {
       steps {
         sh 'docker-compose build'
-        sh "git tag 1.0.${BUILD_NUMBER}" 
+        sh "git tag 2.0.${BUILD_NUMBER}" 
         sh "docker tag ghcr.io/edugoma/hello-springrest:latest ghcr.io/edugoma/hello-springrest:2.0.${BUILD_NUMBER}" 
         sshagent(['Git-hubSSH']) {
           sh "git push --tags"
