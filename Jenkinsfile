@@ -46,7 +46,12 @@ pipeline {
     }
     stage('trivy Test') {
      steps {
-      sh 'trivy fs --scanners vuln,secret,config .'
+      sh 'rivy ghcr.io/edugoma/hello-springrest:latest -f json -o results.json'
+    post {
+     always {
+      recordIssues(tools: [trivy()])
+      }
+     }
      }
     }
     stage('Package image'){
